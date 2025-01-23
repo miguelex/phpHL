@@ -2,9 +2,10 @@
 
     namespace app\business;
 
+    use app\exceptions\DataException;
     use app\interfaces\RepositoryInterface;
 
-    class Get
+    class Delete
     {
         private RepositoryInterface $repository;
 
@@ -13,8 +14,13 @@
             $this->repository = $repository;
         }
 
-        public function get($id)
+        public function delete(int $id)
         {
-            return $this->repository->get();
+            if (!$this->repository->exists($id)) {
+                throw new DataException('Data not found');
+            }
+
+            $this->repository->delete($id);
         }
     }
+    

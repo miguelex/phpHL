@@ -4,6 +4,7 @@
 
     interface ValidatorInterface
     {
-        public function create ($data);
-        public function get(): array;
+        public function validateAdd ($data): bool;
+        public function validateUpdate ($data): bool;
+        public function getError(): string;
     }
