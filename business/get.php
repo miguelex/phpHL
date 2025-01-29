@@ -13,7 +13,7 @@
             $this->repository = $repository;
         }
 
-        public function get($id)
+        public function get()
         {
             return $this->repository->get();
         }

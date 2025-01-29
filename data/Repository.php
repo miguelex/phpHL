@@ -27,4 +27,33 @@
 
             return false;
         }
+
+        public function create($data) {
+            if(count($this->db) == 0){
+                $data['id'] = 1;
+            }else{
+                $data['id'] = (int)$this->db[count($this->db) - 1]['id'] + 1;
+            }
+            $this->db[] = $data;
+            file_put_contents($this->filedata, json_encode($this->db));
+        } 
+
+        public function update($data) {
+            foreach ($this->db as $key => $value) {
+                if ($value['id'] == $data['id']) {
+                    $this->db[$key] = $data;
+                    file_put_contents($this->filedata, json_encode($this->db));
+                }
+            }
+        }
+
+        public function delete($id) {
+            foreach ($this->db as $key => $value) {
+                if ($value['id'] == $id) {
+                    unset($this->db[$key]);
+                    $this->db = array_values($this->db);
+                    file_put_contents($this->filedata, json_encode($this->db));
+                }
+            }
+        }
     }
