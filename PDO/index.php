@@ -1,5 +1,7 @@
 <?php
 
+    header('Content-Type: application/json');
+
     require_once __DIR__.'/autoload.php';
 
     use app\business\get;
@@ -10,15 +12,19 @@
     use app\validators\Validator;
     use app\exceptions\DataException;
     use app\exceptions\ValidatorException;
+    use app\database\RepositoryDB;
 
-    $repository = new Repository();
+    
     $validator = new Validator();
 
     try {
+        //$repository = new Repository();
+        $repository = new RepositoryDB();
+
         switch($_SERVER['REQUEST_METHOD']) {
             case 'POST':
                 $body =json_decode(file_get_contents('php://input'), true);
-                $add = new add($repository, $validator);
+                $add = new Add($repository, $validator);
                 $add->add($body);
                 break;
             case 'PUT':
@@ -45,7 +51,13 @@
     } catch (DataException $e) {
         http_response_code(404);
         echo json_encode(['error' => $e->getMessage()]);
+    } catch (PDOException $e) {
+        http_response_code(500);
+        echo json_encode(['error' => $e->getMessage()]);
     } catch (\Exception $e) {
         http_response_code(500);
+        echo json_encode(['error' => $e->getMessage()]);
+    } catch (TypeError $e) {
+        http_response_code(400);
         echo json_encode(['error' => $e->getMessage()]);
     }
