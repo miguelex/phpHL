@@ -1,0 +1,15 @@
+{
+    "name": "migue/composer",
+    "description": "Pruebas de composer",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Migue\\Composer\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "nesbot/carbon": "^3.0@dev",
+        "phpoffice/phpspreadsheet": "dev-master"
+    }
+}
