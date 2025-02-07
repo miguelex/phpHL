@@ -11,6 +11,8 @@
     require_once __DIR__.'/database/BaseRepository.php';
     require_once __DIR__.'/database/RepositoryDB.php';
 
+    require_once __DIR__.'/session/Session.php';
+
     require_once __DIR__.'/business/get.php';
     require_once __DIR__.'/business/add.php';
     require_once __DIR__.'/business/update.php';

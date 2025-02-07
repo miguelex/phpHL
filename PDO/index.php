@@ -9,6 +9,7 @@
     use app\business\update;
     use app\business\delete;
     use app\data\Repository;
+    use app\session\Session;
     use app\validators\Validator;
     use app\exceptions\DataException;
     use app\exceptions\ValidatorException;
@@ -19,7 +20,8 @@
 
     try {
         //$repository = new Repository();
-        $repository = new RepositoryDB();
+        //$repository = new RepositoryDB();
+        $repository = new Session();
 
         switch($_SERVER['REQUEST_METHOD']) {
             case 'POST':
